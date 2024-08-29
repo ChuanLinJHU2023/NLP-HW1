@@ -1,0 +1,9 @@
+2
+2.1
+A.
+Chuan:Our program generates so many long sentences because of some rules. These rules include "NP	NP PP" and "Noun	Adj Noun". They are special about they can play a role of recursive term and be repeated for countless times.
+
+B.
+Chuan: Give Noun, we have 6 rules to play with. Such as "Noun	Adj Noun" and "Noun	president". "Noun Adj Noun" only account for 1/6. To have k adjs, the prob of the sentence must be less then or equal to (1/6)^k, which is really small.
+
+
