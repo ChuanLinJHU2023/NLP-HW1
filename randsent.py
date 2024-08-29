@@ -29,6 +29,9 @@ import argparse
 # "parsing" a string means identifying the elements of the string and
 # the roles they play.
 
+from tools import *
+from collections import defaultdict
+
 def parse_args():
     """
     Parse command-line arguments.
@@ -92,17 +95,41 @@ class Grammar:
             self
         """
         # Parse the input grammar file
-        self.rules = None
+        self.rules = None # rules is a list of rule. Each rule is a triplet [weight, lhs, rhs]. rhs might also be a list
+        self.dict_prob = None # Given a lhs, dict_prob tells you what rhs-s does this lhs have?Æ
+        self.dict_rhs = None # Given a lhs, dict_prob tells you what probs do the rhs-s have?
         self._load_rules_from_file(grammar_file)
 
-    def _load_rules_from_file(self, grammar_file):
+    def _load_rules_from_file(self, grammar_file = None):
         """
         Read grammar file and store its rules in self.rules
 
         Args:
             grammar_file (str): Path to the raw grammar file 
         """
-        raise NotImplementedError
+        if not grammar_file:
+            grammar_file = 'grammar.gr.txt'
+        filename = grammar_file
+        rules = list()
+        dict_prob = defaultdict(list)
+        dict_rhs = defaultdict(list)
+        # RHS: right hand side
+        with open(filename, 'r') as file:
+            lines = file.readlines()
+            for line in lines:
+                line = process_line(line)
+                if not line:
+                    continue
+                weight = line[0]
+                lhs = line[1]
+                rhs = line[2:]
+                dict_prob[lhs].append(weight)
+                dict_rhs[lhs].append(rhs)
+                rules.append([weight, lhs, rhs])
+        self.rules = rules
+        self.dict_prob = dict_prob
+        self.dict_rhs = dict_rhs
+        return None
 
     def sample(self, derivation_tree, max_expansions, start_symbol):
         """
