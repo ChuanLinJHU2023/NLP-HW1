@@ -1,9 +1,72 @@
 2
 2.1
 A.
-Chuan:Our program generates so many long sentences because of some rules. These rules include "NP	NP PP" and "Noun	Adj Noun". They are special about they can play a role of recursive term and be repeated for countless times.
+Our program generates so many long sentences because of a rule that can play a role of recursive term and be repeated for countless times. That is "NP NP PP". We can see that "NP" appears in both LHS and RHS. As a result, we may have a NP with countless PPs, which makes a long sentence.
 
 B.
-Chuan: Give Noun, we have 6 rules to play with. Such as "Noun	Adj Noun" and "Noun	president". "Noun Adj Noun" only account for 1/6. To have k adjs, the prob of the sentence must be less then or equal to (1/6)^k, which is really small.
+Give Noun, we have 6 rules to play with. Such as "Noun	Adj Noun" and "Noun	president". "Noun Adj Noun" only account for 1/6. To have k adjs, the prob of the sentence must be less then or equal to (1/6)^k, which is really small.
+
+C.
+To fix item 1, I will decrease the weight of rule "1	NP	NP PP" (or enhance the weights of the rivals of this rule).
+To fix item 2, I will enhance the weight of "1	Noun	Adj Noun" (or decrease the weights the rivals of this rule).
+None
+
+D.
+I will reassign weights of rules whose lhs is "Det". In our life, "the" and "a" have a much higher frequency than "every".
+
+E.
+None
 
 
+2.2
+
+9.
+To support sentence 1, I add:
+1 Noun Sally
+
+To support sentence 2, I add:
+1 NP NP and NP
+1 VP VP and VP
+
+To support sentence 3, we must firstly emphasize the following facts:
+"VP" in grammar.txt refers to a transitive verb phrase
+"Verb" in grammar.txt refers to a transitive verb
+As a result, we need to add the following symbols to our symbol set:
+"VP_both" refers to either transitive verb phrase or intransitive verb phrase
+"VP_intran" refers to an intransitive verb phrase
+"Verb_intran" refers to an intransitive verb.
+Here are the revisions.
+Firstly I replace the following first sentence with the following second sentence:
+1	S	NP VP
+1	S	NP VP_both
+Secondly, I add:
+1 VP_both VP
+1 VP_both VP_intran
+1 VP_intran Verb_intran
+1 Verb_intran sighed
+
+To support sentence 4, I add:
+1 VP thought that S
+
+To support sentence 5, I add:
+1 S it perplexed NP that S
+
+To support sentence 6, I add:
+1 S that S perplexed NP 
+
+To support sentence 7, we need to add the following symbol to our symbol set:
+"VERY" means a series of "very", such as "very very".
+Here I add:
+1 VERY very VERY
+1 VERY very
+
+To support sentence 8, we need to add:
+1 Verb_intran worked
+1 Noun proposal
+1 VP_intran Verb_intran PP
+
+
+
+
+10.
+None
