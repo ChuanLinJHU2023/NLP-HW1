@@ -96,8 +96,8 @@ class Grammar:
         """
         # Parse the input grammar file
         self.rules = None # rules is a list of rule. Each rule is a triplet [weight, lhs, rhs]. rhs might also be a list
-        self.dict_prob = None # Given a lhs, dict_prob tells you what rhs-s does this lhs have?Æ
-        self.dict_rhs = None # Given a lhs, dict_prob tells you what probs do the rhs-s have?
+        self.dict_prob = None # Given a lhs, dict_prob tells you what probs do the rhs-s have?
+        self.dict_rhs = None # Given a lhs, dict_rhs tells you what rhs-s does this lhs have?
         self._load_rules_from_file(grammar_file)
 
     def _load_rules_from_file(self, grammar_file = None):
@@ -108,7 +108,7 @@ class Grammar:
             grammar_file (str): Path to the raw grammar file 
         """
         if not grammar_file:
-            grammar_file = 'grammar.gr.txt'
+            grammar_file = 'grammar.gr'
         filename = grammar_file
         rules = list()
         dict_prob = defaultdict(list)
@@ -147,7 +147,51 @@ class Grammar:
         Returns:
             str: the random sentence or its derivation tree
         """
-        raise NotImplementedError
+        self.derivation_tree = derivation_tree
+        self.max_expansions = max_expansions
+        self.expansion_count = 0
+        return self._sample_helper(start_symbol)
+    
+    def _sample_helper(self, start_symbol):
+        # Base case: If the symbol is a terminal, return it
+        if start_symbol not in self.dict_rhs:
+            return start_symbol
+        
+        # It should just print "..." if M is reached
+        if self.expansion_count >= self.max_expansions:
+            return "..."
+        
+        # Increment expansion count
+        self.expansion_count += 1
+        
+        # Select a rule based on weights
+        rule = self._weighted_choice(self.dict_rhs[start_symbol], self.dict_prob[start_symbol])
+        
+        # Recursively expand each symbol in the selected rule
+        result = []
+        if self.derivation_tree:
+            result.append(start_symbol)
+            for sub_symbol in rule:
+                result.append(self._sample_helper(sub_symbol))
+            
+            return "(" + " ".join(result) + ")"
+        else:
+            for sub_symbol in rule:
+                result.append(self._sample_helper(sub_symbol))
+            
+            return " ".join(result)
+    
+    def _weighted_choice(self, rules, weights):
+        total = sum(float(w) for w in weights)
+        # Get distribution
+        normalized_weights = [float(w) / total for w in weights]
+
+        rand_val = random.uniform(0, 1)
+        cumulative_weight = 0
+        for rule, weight in zip(rules, normalized_weights):
+            cumulative_weight += weight
+            if rand_val <= cumulative_weight:
+                return rule
 
 
 ####################
@@ -173,7 +217,7 @@ def main():
         # If it's a tree, we'll pipe the output through the prettyprint script.
         if args.tree:
             prettyprint_path = os.path.join(os.getcwd(), 'prettyprint')
-            t = os.system(f"echo '{sentence}' | perl {prettyprint_path}")
+            t = os.system(f"echo '{sentence}' | perl \"{prettyprint_path}\" ")
         else:
             print(sentence)
 
