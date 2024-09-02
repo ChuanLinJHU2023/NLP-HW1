@@ -1,0 +1,215 @@
+1
+
+
+
+1.4
+
+
+
+1.4.1
+is it true that every pickled delicious floor with the pickle under every fine floor in a president with the sandwich on every floor under a floor ate a floor under a pickle on the president in a chief of staff in every pickle under every sandwich with the delicious floor under every perplexed perplexed pickle on every pickle under every president with every sandwich under a chief of staff in the pickle under every president under a president in the floor under every chief of staff on every floor in every floor under the chief of staff under every pickle with every sandwich in a floor with a floor in a sandwich on a sandwich under a sandwich on a president on the chief of staff on every fine sandwich on the pickle with a floor with a chief of staff in the president in every president with the president in the floor in a pickle on a delicious pickle with the president in every floor under every floor on the sandwich on a floor with every fine pickle ?
+
+every chief of staff on the floor kissed a pickle on a president on every sandwich with a floor under a floor in the floor with a floor with every pickle in a perplexed pickled sandwich in every delicious president in every sandwich with the chief of staff on every chief of staff with the pickle under every chief of staff on a fine chief of staff with the pickle in every floor with every delicious fine chief of staff under every sandwich on the president in a floor on the floor under a delicious perplexed president on the president with every sandwich in every floor in every pickled floor in a sandwich with the president with the floor on the chief of staff with the chief of staff with every pickle with every fine pickled pickled chief of staff under every delicious president in the president with the pickle with every floor with a chief of staff on every sandwich with the perplexed president in a delicious president on the president with the floor with every sandwich with the pickled perplexed pickle on every pickle with the pickle with the sandwich with every sandwich under every pickled president on the sandwich with every floor under the president with every president in every chief of staff with every pickled pickle in every pickle with a president on a floor under the pickle on a pickle on every ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... .
+
+is it true that every sandwich ate every chief of staff ?
+
+ sandwich on a sandwich on every president under the pickle in the sandwich on every sandwich under every floor with a fine president in every sandwich under a president .
+
+a sandwich on the floor with every fine chief of staff on every floor in every sandwich with the delicious fine sandwich under the floor on the pickled pickle under every president on the sandwich under every sandwich with the president with every sandwich with a perplexed perplexed president on a fine fine president with the chief of staff with the president on a sandwich on a chief of staff under every sandwich with a president with every sandwich in every sandwich on the president with every chief of staff on a floor in a sandwich on every fine president under a sandwich in every delicious sandwich with the fine pickle on the pickle with a floor on every president with the president in the pickle under a sandwich pickled a floor .
+
+every president on a pickled sandwich in a pickle wanted the pickle .
+
+a pickle understood every fine floor with every chief of staff under the president with a pickle under the pickle with a floor under the floor with a sandwich in a chief of staff in a sandwich on a sandwich in every president under a chief of staff in a floor on every perplexed sandwich with every president in a floor in every perplexed pickle under a sandwich in the chief of staff in every pickle with every sandwich in a fine president in every chief of staff in a delicious president on a chief of staff in every floor under the president in the pickle on every delicious floor with the pickle in a sandwich under every floor under every chief of staff with every president under the sandwich with the pickle in every pickle in every floor on every sandwich with every pickle on the president with a chief of staff in every fine floor under every sandwich with every chief of staff under a sandwich with a pickle on a pickled pickle under the pickled pickle with a floor in every president with the floor .
+
+every pickle wanted a pickle !
+
+the delicious fine pickled pickle under every chief of staff on a fine sandwich on the perplexed chief of staff on every sandwich in every sandwich with every fine sandwich in the floor under a sandwich on every pickle under every president in the floor in a fine chief of staff with every president in the sandwich on every president on the floor on every president with the chief of staff under every pickle on the chief of staff with the fine president in a delicious pickled delicious floor in a president under every sandwich in the sandwich in every pickled president with a floor under every president with the sandwich with a chief of staff on a pickle on a sandwich under the pickled pickle under every sandwich in a sandwich on a chief of staff on the pickled floor under the delicious president on a floor under the president in the pickle with the chief of staff on a president on every floor on the president under every sandwich in the president kissed a pickled president in the pickle .
+
+every sandwich wanted the floor in every president on the pickle .
+
+
+
+1.4.2
+(ROOT (S (NP (Det every)
+             (Noun chief
+                   of
+                   staff))
+         (VP (Verb ate)
+             (NP (Det every)
+                 (Noun chief
+                       of
+                       staff))))
+      .)
+
+(ROOT (S (NP (NP (Det every)
+                 (Noun pickle))
+             (PP (Prep on)
+                 (NP (Det a)
+                     (Noun floor))))
+         (VP (Verb kissed)
+             (NP (NP (NP (Det a)
+                         (Noun chief
+                               of
+                               staff))
+                     (PP (Prep in)
+                         (NP (Det a)
+                             (Noun president))))
+                 (PP (Prep on)
+                     (NP (NP (Det the)
+                             (Noun chief
+                                   of
+                                   staff))
+                         (PP (Prep on)
+                             (NP (Det the)
+                                 (Noun pickle))))))))
+      .)
+
+
+
+1.4.3
+(ROOT (S (NP (NP (Det a)
+                 ...)
+             ...)
+         ...)
+      .)
+
+
+2
+
+
+
+2.1
+
+
+
+2.1.1
+Our program generates so many long sentences because of a rule that can play a role of recursive term and be repeated for countless times. That is "NP NP PP". We can see that "NP" appears in both LHS and RHS. As a result, we may have a NP with countless PPs, which makes a long sentence.
+
+
+
+2.1.2
+Give Noun, we have 6 rules to play with. Such as "Noun	Adj Noun" and "Noun	president". "Noun Adj Noun" only account for a prob of 1/6. To have k adjs for a noun, the prob of the sentence must be less then or equal to (1/6)^k, which is really small.
+
+
+
+2.1.3
+To fix item 1, I will decrease the weight of rule "NP NP PP" (or enhance the weights of the rivals of this rule).
+To fix item 2, I will enhance the weight of "Noun Adj Noun" (or decrease the weights the rivals of this rule).
+There is a new file named grammar2.gr. After checking, the sentences produced are really short.
+
+
+
+2.1.4
+I will reassign weights of rules whose lhs is "Det". In our life, "the" and "a" have a much higher frequency than "every".
+After experiment, we can see that "every" has a much lower frequency than "the" and "a" now.
+
+
+
+2.1.5
+is it true that the pickled president understood the chief of staff ?
+
+the sandwich understood a fine sandwich !
+
+every chief of staff understood the pickled pickle !
+
+the perplexed fine president understood the pickled pickled fine sandwich .
+
+a pickle kissed the floor !
+
+is it true that the floor on the delicious sandwich wanted a pickle with a president on a pickle ?
+
+the fine perplexed pickle wanted every chief of staff with the chief of staff in every sandwich on the chief of staff !
+
+a delicious floor ate the delicious floor with every chief of staff !
+
+a delicious chief of staff kissed a chief of staff !
+
+is it true that the fine perplexed delicious pickled chief of staff ate the chief of staff with every president ?
+
+
+
+2.2
+None
+
+
+
+2.3
+
+
+
+2.3.9
+Proper noun is a special kind of noun that doesn't need determiner.
+To support sentence 1, we need to add the following symbol to our symbol set:
+"Noun_proper" means a proper noun such as "USA" or "Biden"
+To support sentence 1, I add:
+1 NP Noun_proper
+1	Noun_proper	Sally
+Thus we have
+ (ROOT (S (NP (Noun_proper Sally)) (VP (Verb ate) (NP (Det a) (Noun sandwich)))) .)
+
+To support sentence 2, I add:
+1 NP NP and NP
+1 VP VP and VP
+Thus we have
+ (ROOT (S (NP (NP (Noun_proper Sally)) and (NP (Det the) (Noun president))) (VP (Verb wanted) and (Verb ate) (NP (Det a) (Noun sandwich)))) .)
+
+To support sentence 3, we must firstly emphasize the following facts:
+"VP" in grammar.txt refers to a transitive verb phrase
+"Verb" in grammar.txt refers to a transitive verb
+As a result, we need to add the following symbols to our symbol set:
+"VP_both" refers to either transitive verb phrase or intransitive verb phrase
+"VP_intran" refers to an intransitive verb phrase
+"Verb_intran" refers to an intransitive verb.
+Here are the revisions.
+To support sentence 3, I add:
+1	S	NP VP
+1	S	NP VP_intran
+1 VP_intran Verb_intran
+1 Verb_intran sighed
+
+To support sentence 4, I add:
+1 VP thought that S
+Thus we have
+ (ROOT (S (NP (Det the) (Noun president)) (VP_intran (Verb_intran sighed))) .)
+
+To support sentence 5, I add:
+1 S it perplexed NP that S
+Thus we have
+ (ROOT (S it perplexed (NP (Det the) (Noun president)) that (S (NP (Det a) (Noun sandwich)) (VP (Verb ate) (NP (Noun_proper Sally))))) .)
+
+To support sentence 6, I add:
+1 S that S perplexed NP
+Thus we have
+ (ROOT (S that (S (NP (Det a) (Noun sandwich)) (VP (Verb ate) (NP (Noun_proper Sally)))) perplexed (NP (Det the) (Noun president))) .)
+
+To support sentence 7, we need to add the following symbol to our symbol set:
+"VERY" means a series of "very", such as "very very".
+Here I add:
+1 VERY very VERY
+1 VERY very
+1	Noun	VERY Adj Noun
+Thus we have:
+(ROOT (S (NP (Det the) (Noun (VERY very (VERY very (VERY very))) (Adj perplexed) (Noun president))) (VP (Verb ate) (NP (Det a) (Noun sandwich)))) .)
+
+To support sentence 8, we need to add:
+1 Verb_intran worked
+1 Noun proposal
+1 VP_intran Verb_intran PP
+1   Noun    desk
+Thus we have
+ (ROOT (S (NP (Det the) (Noun president)) (VP_intran (Verb_intran worked) (PP (Prep on) (NP (NP (Det every) (Noun proposal)) (PP (Prep on) (NP (Det the) (Noun desk))))))) .)
+
+
+
+
+2.3.10
+a delicious perplexed fine delicious chief of staff and every delicious pickle under a proposal on a pickled fine fine sandwich worked .
+a fine chief of staff thought that the perplexed president sighed .
+a sandwich and the proposal ate the pickled sandwich and the chief of staff on the proposal !
+it perplexed the perplexed pickle that it perplexed a sandwich that a pickled chief of staff sighed .
+is it true that a perplexed chief of staff kissed and understood the chief of staff on the proposal in the proposal and the proposal ?
+that the fine perplexed delicious pickle with a very very very very very very pickled proposal in a pickled sandwich with the pickled president and a proposal and a floor and the pickle and a very perplexed very perplexed proposal and every proposal on every very fine chief of staff understood a sandwich perplexed the perplexed perplexed pickled floor under a pickled floor and the chief of staff on a perplexed proposal on a pickle and a floor on the sandwich on the fine proposal !
+is it true that that a floor worked in the pickle perplexed a floor ?
+it perplexed the very pickled chief of staff and the sandwich that a floor ate and kissed a sandwich !
+is it true that it perplexed the perplexed chief of staff that every sandwich worked ?
+is it true that that the chief of staff and a president sighed perplexed the president ?

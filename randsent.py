@@ -29,7 +29,6 @@ import argparse
 # "parsing" a string means identifying the elements of the string and
 # the roles they play.
 
-from tools import *
 from collections import defaultdict
 
 def parse_args():
@@ -82,6 +81,18 @@ def parse_args():
     )
     return parser.parse_args()
 
+def process_line(line):
+    if line[0]=="#":
+        return None
+    line = line.strip()
+    if "#" in line:
+        line = line[:line.index("#")]
+    line = line.strip()
+    line = line.split(" ")
+    line = line[0].split("\t") + line[1:]
+    if len(line)==1:
+        return None
+    return line
 
 class Grammar:
     def __init__(self, grammar_file):

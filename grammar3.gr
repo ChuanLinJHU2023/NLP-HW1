@@ -28,20 +28,20 @@
 #    NP = noun phrase
 #    VP = verb phrase (transitive)
 #    VP_intran = verb phrase (intransitive)
-#    VP_both = verb phrase (either transitive or intransitive)
 #    PP = prepositional phrase
 #    Det = determiner (sometimes called "article")
 #    Prep = preposition
 #    Adj = adjective
 #    Verb = verb (transitive)
 #    Verb_intran = verb (intransitive)
-#    Verb_both = verb (either transitive or intransitive)
 #    VERY = a series of "very", such as "very very"
 
-1	S	NP VP_both
+1	S	NP VP
+1	S	NP VP_intran
 1	S	it perplexed NP that S
 1	S	that S perplexed NP 
 1	VP	Verb NP
+1	VP	Verb and Verb NP
 1	VP	VP and VP
 1	VP	thought that S
 4	VP_intran	Verb_intran
@@ -49,8 +49,10 @@
 4	NP	Det Noun
 1	NP	NP PP
 1	NP	NP and NP
+1   NP Noun_proper
 1	PP	Prep NP
 3	Noun	Adj Noun
+1	Noun	VERY Adj Noun
 1	VERY	very VERY
 1	VERY	very
 
@@ -77,8 +79,9 @@
 1	Noun	pickle
 1	Noun	chief of staff
 1	Noun	floor
-1	Noun	Sally
 1	Noun	proposal
+1   Noun    desk
+1	Noun_proper	Sally
 
 1	Adj	fine
 1	Adj	delicious
