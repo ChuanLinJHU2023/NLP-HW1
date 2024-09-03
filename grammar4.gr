@@ -22,9 +22,12 @@
 1	ROOT	S .
 1	ROOT	S !
 1	ROOT	is it true that S ?     # mixing terminals and nonterminals is ok.
+100	ROOT	Aux S_b ?
 
-# The basic grammar rules.  Here's what the abbreviations stand for:
-#    S  = sentence
+
+################ Notice: Without further notice, verbs are transitive and in past form. ################
+# The basic grammar rules. Here's what the abbreviations stand for:
+#    S = sentence
 #    NP = noun phrase
 #    VP = verb phrase (transitive)
 #    VP_intran = verb phrase (intransitive)
@@ -36,25 +39,51 @@
 #    Verb_intran = verb (intransitive)
 #    VERY = a series of "very", such as "very very"
 
+#    S_b = sentence with verb in base form
+#    VP_b = base-form verb phrase (transitive)
+#    VP_intran_b = base-form verb phrase (intransitive)
+#    Verb_b = base form of verb (transitive)
+#    Verb_intran_b = base form of verb (intransitive)
+#    Aux = auxiliary verb 
+
+#    RC = relative clause
+
 1	S	NP VP
 1	S	NP VP_intran
 1	S	it perplexed NP that S
 1	S	that S perplexed NP 
+1	S_b	NP VP_b
+1	S_b	NP VP_intran_b
+1	S_b	it perplex NP that S
+1	S_b	that S perplex NP
 1	VP	Verb NP
 1	VP	Verb and Verb NP
 1	VP	VP and VP
 1	VP	thought that S
+1	VP_b	Verb_b NP
+1	VP_b	Verb_b and Verb_b NP
+1	VP_b	VP_b and VP_b 
+1	VP_b	think that S
 4	VP_intran	Verb_intran
 1	VP_intran	Verb_intran PP
-4	NP	Det Noun
+4	VP_intran_b	Verb_intran_b
+1	VP_intran_b	Verb_intran_b PP
+1	NP	Det Noun
+1	NP	Det Noun RC
 1	NP	NP PP
 1	NP	NP and NP
 1	NP	Noun_proper
+1	RC	that VP
+1	RC	that NP Verb
+1	RC	that NP thought RC
+
 1	PP	Prep NP
 3	Noun	Adj Noun
 1	Noun	VERY Adj Noun
 1	VERY	very VERY
 1	VERY	very
+
+
 
 # Vocabulary.  Your program can see that "ate" is a terminal
 # symbol because there exists no rule for rewriting it.
@@ -69,6 +98,17 @@
 1	Verb	pickled
 1	Verb_intran	sighed
 1	Verb_intran	worked
+
+1	Verb_b	eat
+1	Verb_b	want
+1	Verb_b	kiss
+1	Verb_b	understand
+1	Verb_b	pickle
+1	Verb_intran_b	sigh
+1	Verb_intran_b	work
+
+1	Aux	will
+1	Aux	did
 
 4	Det	the
 4	Det	a
